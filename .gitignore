@@ -1,0 +1,22 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Dev tools (no se despliegan)
+tools/
+*.pyc
+
+# Fotos originales sin comprimir (455 MB) — la web usa assets/img ya optimizadas.
+# Se quedan en tu disco pero NO se suben a GitHub/Vercel.
+assets/photos/source/
+
+# Logs
+*.log
+npm-debug.log*

@@ -1,0 +1,4 @@
+# No subir a Vercel: fuentes pesadas y utilidades de desarrollo.
+# La web solo necesita assets/img (ya optimizadas).
+assets/photos/source
+tools
