@@ -287,6 +287,12 @@ ul { list-style: none; padding: 0; }
   align-items: center;
   gap: 1.2rem;
 }
+.splash-logo {
+  width: clamp(220px, 42vw, 340px);
+  height: auto;
+  display: block;
+  margin-bottom: 1.6rem;
+}
 .splash-glyph {
   font-family: var(--serif);
   font-style: italic;
@@ -1306,6 +1312,12 @@ body.menu-open { overflow: hidden; }
   .foot-grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 3rem; }
 }
 
+.foot-logo {
+  display: block;
+  width: clamp(180px, 28vw, 220px);
+  height: auto;
+  margin-bottom: 1.3rem;
+}
 .foot-glyph {
   display: block;
   font-family: var(--serif);
