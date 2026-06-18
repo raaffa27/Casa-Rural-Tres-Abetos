@@ -12,7 +12,7 @@
       ]
     },
     {
-      "source": "/((?!assets/).*\\.(css|js|mjs|json))",
+      "source": "/(.*\\.(css|js|mjs))",
       "headers": [
         { "key": "Cache-Control", "value": "no-cache, must-revalidate" }
       ]
