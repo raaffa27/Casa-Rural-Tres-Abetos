@@ -372,6 +372,22 @@ ul { list-style: none; padding: 0; }
 }
 .nav-brand-name { letter-spacing: 0.02em; }
 
+/* Logo en el nav: dentro de una pastilla oscura redondeada para que la marca
+   crema se lea bien sobre el hero (sea claro u oscuro). */
+.nav-logo {
+  display: block;
+  height: 40px;
+  width: auto;
+  padding: 8px 16px;
+  background: rgba(13,9,5,0.6);
+  border: 1px solid rgba(242,235,218,0.18);
+  border-radius: 999px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+@media (min-width: 720px) {
+  .nav-logo { height: 46px; }
+}
+
 .nav-links {
   display: none;
   justify-content: center;
