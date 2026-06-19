@@ -4,7 +4,7 @@
   "trailingSlash": false,
   "headers": [
     {
-      "source": "/(.*\\.html)",
+      "source": "/(.*)\\.html",
       "headers": [
         { "key": "Cache-Control", "value": "no-cache, must-revalidate" },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
@@ -12,7 +12,7 @@
       ]
     },
     {
-      "source": "/(.*\\.(css|js|mjs))",
+      "source": "/(.*)\\.(css|js)",
       "headers": [
         { "key": "Cache-Control", "value": "no-cache, must-revalidate" }
       ]
@@ -21,12 +21,6 @@
       "source": "/assets/img/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=2592000, immutable" }
-      ]
-    },
-    {
-      "source": "/(.*\\.(webp|jpg|jpeg|png|svg|ico|woff2|woff))",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=2592000" }
       ]
     },
     {
