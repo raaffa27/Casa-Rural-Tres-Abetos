@@ -537,21 +537,14 @@ body.menu-open { overflow: hidden; }
 
 .hero-tint {
   position: absolute; inset: 0; z-index: -2;
+  /* Velo uniforme (contenido centrado): oscurece toda la foto para que el logo
+     y el texto se lean en el centro, algo más fuerte abajo. */
   background:
-    /* Vertical: cielo/árbol visibles arriba, muy oscuro en el tercio inferior
-       (todo el bloque de texto cae ahí) */
     linear-gradient(180deg,
-      rgba(13,9,5,0.42) 0%,
-      rgba(13,9,5,0.14) 18%,
-      rgba(13,9,5,0.42) 42%,
-      rgba(13,9,5,0.8) 60%,
-      rgba(11,7,3,0.98) 82%,
-      rgba(11,7,3,1) 100%),
-    /* Lateral: refuerza el lado izquierdo donde está el texto */
-    linear-gradient(75deg,
-      rgba(11,7,3,0.85) 0%,
-      rgba(13,9,5,0.4) 45%,
-      rgba(13,9,5,0.08) 78%);
+      rgba(11,7,3,0.5) 0%,
+      rgba(11,7,3,0.32) 35%,
+      rgba(11,7,3,0.5) 68%,
+      rgba(11,7,3,0.94) 100%);
 }
 
 .hero-mesh {
@@ -577,28 +570,23 @@ body.menu-open { overflow: hidden; }
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 1400px;
+  max-width: 980px;
   margin-inline: auto;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 1.5rem;
+  align-items: center;
+  text-align: center;
+  gap: 1.4rem;
   text-shadow: 0 2px 24px rgba(0,0,0,0.85), 0 1px 4px rgba(0,0,0,0.6);
 }
-/* Scrim local: oscurece la base del hero (donde cae el texto) sin tapar la
-   parte alta de la foto. Anclado al contenido → funciona en cualquier pantalla. */
+/* Velo radial central detrás del contenido para legibilidad del bloque centrado. */
 .hero-inner::before {
   content: "";
   position: absolute;
-  left: -6vw; right: -6vw; bottom: -8vh;
-  height: 74%;
+  inset: -14% -24%;
   z-index: -1;
   pointer-events: none;
-  background: linear-gradient(to top,
-    rgba(8,5,3,0.92) 0%,
-    rgba(8,5,3,0.74) 38%,
-    rgba(8,5,3,0.34) 72%,
-    transparent 100%);
+  background: radial-gradient(62% 62% at 50% 52%, rgba(8,5,3,0.72), rgba(8,5,3,0.28) 68%, transparent 85%);
 }
 
 .hero-meta {
@@ -629,16 +617,12 @@ body.menu-open { overflow: hidden; }
   50% { opacity: 0.7; box-shadow: 0 0 0 8px rgba(200,152,86,0.05); }
 }
 
-.hero-glyph {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: clamp(2.2rem, 5vw, 3.4rem);
-  font-weight: 350;
-  letter-spacing: 0.3em;
-  color: var(--accent);
-  font-variation-settings: "SOFT" 100, "opsz" 144;
-  line-height: 1;
-  text-shadow: 0 4px 24px rgba(200,152,86,0.35);
+.hero-logo {
+  display: block;
+  width: clamp(280px, 44vw, 540px);
+  height: auto;
+  margin: 0 auto 0.2rem;
+  filter: drop-shadow(0 8px 34px rgba(0,0,0,0.55));
 }
 
 .hero-title {
@@ -674,8 +658,8 @@ body.menu-open { overflow: hidden; }
   font-size: clamp(1.05rem, 1.8vw, 1.45rem);
   line-height: 1.45;
   color: var(--cream);
-  max-width: 38ch;
-  margin-top: 0.5rem;
+  max-width: 42ch;
+  margin: 0.5rem auto 0;
   font-variation-settings: "SOFT" 80;
   text-shadow: 0 1px 2px rgba(0,0,0,0.95), 0 2px 16px rgba(0,0,0,0.85);
 }
@@ -683,16 +667,10 @@ body.menu-open { overflow: hidden; }
 .hero-foot {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  margin-top: 1.4rem;
+  align-items: center;
+  gap: 1.6rem;
+  margin-top: 1.6rem;
   width: 100%;
-}
-@media (min-width: 720px) {
-  .hero-foot {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
 }
 
 .hero-stats {
