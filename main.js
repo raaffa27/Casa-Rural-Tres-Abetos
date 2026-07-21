@@ -260,8 +260,12 @@
   /* Marquee: ahora es 100% CSS (animation: marqueeScroll en styles.css).
      Antes usaba GSAP con un modifier por frame, que sumaba carga a la GPU. */
 
-  /* ============ Hero parallax ============ */
+  /* ============ Hero parallax ============
+     Desactivado: el hero ya no lleva foto de fondo, solo el logo sobre blanco.
+     El parallax lo desvanecía (opacity 0.2) al bajar, que aquí no aporta nada. */
   function initHeroParallax() {
+    return;
+    /* eslint-disable no-unreachable */
     if (!window.gsap || !window.ScrollTrigger) return;
     const heroBg = $(".hero-bg");
     const heroInner = $(".hero-inner");
