@@ -16,8 +16,66 @@
 
   /* ============ Year ============ */
   function initYear() {
+    const year = new Date().getFullYear();
     const y = $("#year");
-    if (y) y.textContent = new Date().getFullYear();
+    if (y) y.textContent = year;
+    $$("[data-year]").forEach((el) => { el.textContent = year; });
+  }
+
+  /* ============ Cookies + mapa diferido (RGPD) ============
+     El mapa de Google instala cookies de terceros: no se carga hasta que
+     el usuario lo acepta expresamente. */
+  const COOKIE_KEY = "tresabetos_cookies";
+
+  function getConsent() {
+    try { return localStorage.getItem(COOKIE_KEY); } catch (e) { return null; }
+  }
+  function setConsent(value) {
+    try { localStorage.setItem(COOKIE_KEY, value); } catch (e) {}
+  }
+
+  function loadMap() {
+    const wrap = $("[data-map]");
+    if (!wrap || wrap.querySelector("iframe")) return;
+    const src = wrap.getAttribute("data-map-src");
+    if (!src) return;
+    const iframe = document.createElement("iframe");
+    iframe.title = "Ubicación de Casa Rural Tres Abetos en Becerril de la Sierra";
+    iframe.src = src;
+    iframe.loading = "lazy";
+    iframe.referrerPolicy = "no-referrer-when-downgrade";
+    iframe.setAttribute("allowfullscreen", "");
+    wrap.insertBefore(iframe, wrap.firstChild);
+    const ph = $("[data-map-placeholder]", wrap);
+    if (ph) ph.style.display = "none";
+  }
+
+  function initCookies() {
+    const banner = $("[data-cookie-banner]");
+    const consent = getConsent();
+
+    if (consent === "accepted") loadMap();
+    if (!consent && banner) banner.classList.add("is-open");
+
+    function close() { if (banner) banner.classList.remove("is-open"); }
+
+    const accept = $("[data-cookie-accept]");
+    if (accept) accept.addEventListener("click", () => { setConsent("accepted"); close(); loadMap(); });
+
+    const reject = $("[data-cookie-reject]");
+    if (reject) reject.addEventListener("click", () => { setConsent("rejected"); close(); });
+
+    // Botón del propio mapa: consentimiento expreso para cargarlo
+    const mapBtn = $("[data-map-load]");
+    if (mapBtn) mapBtn.addEventListener("click", () => { setConsent("accepted"); close(); loadMap(); });
+
+    // Botón en la política de cookies para cambiar la decisión
+    const resetBtn = $("[data-cookie-reset]");
+    if (resetBtn) resetBtn.addEventListener("click", () => {
+      try { localStorage.removeItem(COOKIE_KEY); } catch (e) {}
+      resetBtn.textContent = "Preferencias borradas — se te preguntará de nuevo";
+      resetBtn.disabled = true;
+    });
   }
 
   /* ============ Splash ============ */
@@ -393,6 +451,7 @@
   function boot() {
     // Phase 1 — no dependencies
     safe(initYear, "initYear");
+    safe(initCookies, "initCookies");
     safe(initSplash, "initSplash");
     safe(initNav, "initNav");
     safe(initMobileMenu, "initMobileMenu");

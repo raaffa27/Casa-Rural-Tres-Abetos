@@ -396,13 +396,13 @@
             </div>
           </div>
 
-          <div class="location-map reveal">
-            <iframe
-              title="Ubicación de Casa Rural Tres Abetos en Becerril de la Sierra"
-              src="https://www.google.com/maps?q=Calle+de+los+Balagos,+Becerril+de+la+Sierra,+Madrid&output=embed"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              allowfullscreen></iframe>
+          <div class="location-map reveal" data-map
+               data-map-src="https://www.google.com/maps?q=Calle+de+los+Balagos,+Becerril+de+la+Sierra,+Madrid&output=embed">
+            <div class="map-placeholder" data-map-placeholder>
+              <p>El mapa lo proporciona Google Maps, que instala cookies propias. Para verlo aquí, acepta su carga.</p>
+              <button type="button" class="btn btn-ghost" data-map-load>Ver el mapa</button>
+              <span class="map-note">O abre “Cómo llegar” para verlo en Google Maps</span>
+            </div>
             <div class="location-map-tint" aria-hidden="true"></div>
           </div>
         </div>
@@ -470,12 +470,27 @@
           <a href="https://www.google.com/maps/search/?api=1&query=Calle+de+los+Balagos+Becerril+de+la+Sierra+Madrid" target="_blank" rel="noopener" class="foot-link">Cómo llegar</a>
         </div>
         <div class="foot-block foot-block-meta">
-          <p class="foot-text foot-mute">Sierra de Guadarrama · Madrid</p>
+          <p class="foot-label">Legal</p>
+          <a href="aviso-legal.html" class="foot-link">Aviso legal</a>
+          <a href="privacidad.html" class="foot-link">Política de privacidad</a>
+          <a href="cookies.html" class="foot-link">Política de cookies</a>
           <p class="foot-text foot-mute">© <span id="year">2026</span> · Tres Abetos</p>
         </div>
       </div>
     </div>
   </footer>
+
+  <!-- ============ BANNER DE COOKIES ============ -->
+  <div class="cookie-banner" data-cookie-banner role="dialog" aria-live="polite" aria-label="Aviso de cookies">
+    <p class="cookie-text">
+      Esta web no usa cookies de análisis ni publicidad. Solo el <strong>mapa de Google Maps</strong> instala cookies de terceros al cargarlo.
+      Puedes aceptarlo o rechazarlo. Más información en la <a href="cookies.html">Política de Cookies</a>.
+    </p>
+    <div class="cookie-actions">
+      <button type="button" class="btn btn-primary" data-cookie-accept>Aceptar</button>
+      <button type="button" class="btn btn-ghost" data-cookie-reject>Rechazar</button>
+    </div>
+  </div>
 
   <!-- ============ LIGHTBOX (galería) ============ -->
   <div class="lightbox" data-lightbox aria-hidden="true" role="dialog" aria-modal="true" aria-label="Galería ampliada">
@@ -499,6 +514,6 @@
   <script defer src="lib/gsap.min.js?v=20260613"></script>
   <script defer src="lib/ScrollTrigger.min.js?v=20260613"></script>
   <script defer src="lib/manifest.js?v=20260613"></script>
-  <script defer src="main.js?v=20260613r"></script>
+  <script defer src="main.js?v=20260619b"></script>
 </body>
 </html>
