@@ -333,21 +333,66 @@ ul { list-style: none; padding: 0; }
 /* =============================================================
    8. Nav
    ============================================================= */
+/* Franja superior de utilidades: social a la izquierda, opiniones a la derecha.
+   Estática: se va con el scroll (el menú de debajo es el que se queda pegado). */
+.topbar {
+  background: #7a6a58;
+  color: #f2ece2;
+}
+.topbar-inner {
+  max-width: 1400px;
+  margin-inline: auto;
+  padding: 0.5rem var(--gutter-x);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.topbar-social {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+.topbar-label {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+.topbar-social a,
+.topbar-link {
+  color: #f2ece2;
+  display: inline-flex;
+  align-items: center;
+  transition: opacity 0.3s var(--ease-out);
+}
+.topbar-social a:hover,
+.topbar-link:hover { opacity: 0.65; }
+.topbar-link {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
 /* Barra blanca con líneas finas arriba y abajo (estilo editorial claro).
    Sticky, no fixed: arranca debajo del logo y se pega arriba al bajar. */
 .nav {
   position: sticky; top: 0;
   z-index: var(--z-nav);
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+  display: flex;
   align-items: center;
-  gap: 2rem;
+  justify-content: center;
+  gap: 1.2rem;
   padding: 0.9rem var(--gutter-x);
   background: #ffffff;
   border-top: 1px solid #e2e2e2;
   border-bottom: 1px solid #e2e2e2;
   transition: padding 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
 }
+/* El enlace del logo en el nav ya no se usa: no debe ocupar sitio ni romper el centrado */
+.nav-brand { display: none; }
 .nav.is-scrolled {
   padding-top: 0.7rem;
   padding-bottom: 0.7rem;
@@ -424,7 +469,12 @@ ul { list-style: none; padding: 0; }
 }
 .nav-airbnb { padding: 0.7rem 1.3rem; font-size: 0.85rem; }
 
+/* En móvil va anclada a la derecha para no descentrar el bloque del menú */
 .nav-burger {
+  position: absolute;
+  right: var(--gutter-x);
+  top: 50%;
+  transform: translateY(-50%);
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
