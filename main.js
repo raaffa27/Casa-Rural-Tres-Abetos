@@ -106,6 +106,84 @@
     window.addEventListener("scroll", onScroll, { passive: true });
   }
 
+  /* ============ Carrusel de bienvenida ============ */
+  function initWelcomeCarousel() {
+    const root = $("[data-carousel]");
+    if (!root) return;
+    const slides = $$(".welcome-slide", root);
+    if (slides.length === 0) return;
+
+    const prevBtn = $("[data-carousel-prev]", root);
+    const nextBtn = $("[data-carousel-next]", root);
+    const dotsWrap = $("[data-carousel-dots]", root);
+    const INTERVAL = 10000; // 10 s por foto
+    let index = slides.findIndex((s) => s.classList.contains("is-active"));
+    if (index < 0) index = 0;
+    let timer = null;
+
+    // Puntitos indicadores
+    const dots = slides.map((_, i) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("aria-label", "Ir a la foto " + (i + 1));
+      b.addEventListener("click", () => go(i, true));
+      if (dotsWrap) dotsWrap.appendChild(b);
+      return b;
+    });
+
+    function paint() {
+      slides.forEach((s, i) => s.classList.toggle("is-active", i === index));
+      dots.forEach((d, i) => d.classList.toggle("is-active", i === index));
+      // Reiniciar el zoom lento de la foto que entra
+      const img = slides[index].querySelector("img");
+      if (img) {
+        img.style.animation = "none";
+        // forzar reflow para reiniciar la animación CSS
+        void img.offsetWidth;
+        img.style.animation = "";
+      }
+    }
+
+    function go(to, manual) {
+      index = (to + slides.length) % slides.length;
+      paint();
+      if (manual) restart();
+    }
+
+    const next = (manual) => go(index + 1, manual);
+    const prev = (manual) => go(index - 1, manual);
+
+    function restart() {
+      if (timer) clearInterval(timer);
+      timer = setInterval(() => next(false), INTERVAL);
+    }
+
+    if (nextBtn) nextBtn.addEventListener("click", () => next(true));
+    if (prevBtn) prevBtn.addEventListener("click", () => prev(true));
+
+    // Pausa al pasar el ratón por encima
+    root.addEventListener("mouseenter", () => { if (timer) clearInterval(timer); });
+    root.addEventListener("mouseleave", restart);
+
+    // Altura: logo + menú + carrusel caben justos en la primera pantalla
+    function fit() {
+      const topbar = $(".topbar");
+      const hero = $(".hero");
+      const nav = $(".nav");
+      const used =
+        (topbar ? topbar.offsetHeight : 0) +
+        (hero ? hero.offsetHeight : 0) +
+        (nav ? nav.offsetHeight : 0);
+      const h = Math.max(260, window.innerHeight - used);
+      root.style.setProperty("--welcome-h", h + "px");
+    }
+    fit();
+    window.addEventListener("resize", fit, { passive: true });
+
+    paint();
+    restart();
+  }
+
   /* ============ Mobile menu ============ */
   function initMobileMenu() {
     const burger = $("[data-nav-burger]");
@@ -458,6 +536,7 @@
     safe(initCookies, "initCookies");
     safe(initSplash, "initSplash");
     safe(initNav, "initNav");
+    safe(initWelcomeCarousel, "initWelcomeCarousel");
     safe(initMobileMenu, "initMobileMenu");
     safe(initSmoothAnchors, "initSmoothAnchors");
     safe(initReveals, "initReveals");

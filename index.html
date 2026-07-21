@@ -23,7 +23,7 @@
 
   <link rel="preload" as="image" href="assets/img/hero-piscina.webp" fetchpriority="high" />
 
-  <link rel="stylesheet" href="styles.css?v=20260721e" />
+  <link rel="stylesheet" href="styles.css?v=20260722a" />
 </head>
 <body class="theme-dark">
 
@@ -95,6 +95,24 @@
       <a href="https://instagram.com/casa_rural_tres_abetos" target="_blank" rel="noopener">@casa_rural_tres_abetos</a>
     </div>
   </div>
+
+  <!-- ============ CARRUSEL DE BIENVENIDA ============ -->
+  <section class="welcome" data-carousel aria-label="Fotos de la casa" aria-roledescription="carrusel">
+    <div class="welcome-track">
+      <div class="welcome-slide is-active"><img src="assets/img/salon-02.webp" alt="Salón con sofás y butacas" fetchpriority="high" /></div>
+      <div class="welcome-slide"><img src="assets/img/salon-05.webp" alt="Comedor con chimenea" loading="lazy" /></div>
+      <div class="welcome-slide"><img src="assets/img/entrada-01.webp" alt="Recibidor con escalera de mármol" loading="lazy" /></div>
+      <div class="welcome-slide"><img src="assets/img/dormitorio-sup-01.webp" alt="Distribuidor de la planta superior" loading="lazy" /></div>
+      <div class="welcome-slide"><img src="assets/img/cocina-01.webp" alt="Cocina equipada" loading="lazy" /></div>
+    </div>
+    <button class="welcome-arrow welcome-prev" type="button" data-carousel-prev aria-label="Foto anterior">
+      <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M15 6l-6 6 6 6"/></svg>
+    </button>
+    <button class="welcome-arrow welcome-next" type="button" data-carousel-next aria-label="Foto siguiente">
+      <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M9 6l6 6-6 6"/></svg>
+    </button>
+    <div class="welcome-dots" data-carousel-dots aria-hidden="true"></div>
+  </section>
 
   <main id="main">
 
@@ -443,6 +461,6 @@
   <script defer src="lib/gsap.min.js?v=20260613"></script>
   <script defer src="lib/ScrollTrigger.min.js?v=20260613"></script>
   <script defer src="lib/manifest.js?v=20260613"></script>
-  <script defer src="main.js?v=20260721e"></script>
+  <script defer src="main.js?v=20260722a"></script>
 </body>
 </html>

@@ -532,13 +532,14 @@ body.menu-open { overflow: hidden; }
 /* =============================================================
    9. Hero
    ============================================================= */
-/* Banda blanca superior: solo el logo. Se va con el scroll (el menú se queda). */
+/* Banda blanca superior: solo el logo. Se va con el scroll (el menú se queda).
+   Compacta a propósito: logo + menú + carrusel deben caber en la 1.ª pantalla. */
 .hero {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(2.5rem, 6vh, 4.5rem) var(--gutter-x) clamp(2rem, 5vh, 3.5rem);
+  padding: clamp(1.4rem, 3vh, 2.4rem) var(--gutter-x) clamp(1.2rem, 2.5vh, 2rem);
   overflow: hidden;
   isolation: isolate;
   background: #ffffff;
@@ -598,7 +599,7 @@ body.menu-open { overflow: hidden; }
 
 .hero-logo {
   display: block;
-  width: clamp(300px, 45vw, 500px);
+  width: clamp(190px, 26vw, 320px);
   height: auto;
   margin: 0 auto;
   filter: none;
@@ -715,6 +716,80 @@ body.menu-open { overflow: hidden; }
   50% { transform: scaleY(1); transform-origin: top; }
   51% { transform: scaleY(1); transform-origin: bottom; }
   100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* =============================================================
+   9b. Carrusel de bienvenida
+   ============================================================= */
+/* Altura calculada por JS (--welcome-h) para que logo + menú + carrusel
+   quepan justos en la primera pantalla. Fallback razonable si el JS no corre. */
+.welcome {
+  position: relative;
+  width: 100%;
+  height: var(--welcome-h, 60vh);
+  min-height: 260px;
+  overflow: hidden;
+  background: #000;
+  isolation: isolate;
+}
+.welcome-track { position: absolute; inset: 0; }
+.welcome-slide {
+  position: absolute; inset: 0;
+  opacity: 0;
+  transition: opacity 1.1s var(--ease-soft);
+  pointer-events: none;
+}
+.welcome-slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.welcome-slide img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+/* Zoom lento (Ken Burns): la foto activa se agranda poco a poco durante los 10 s.
+   Solo transform (GPU) — no anima blur ni filtros. Pedido expresamente por el
+   usuario, así que NO se gatea con prefers-reduced-motion. */
+.welcome-slide.is-active img {
+  animation: welcomeZoom 10s linear forwards;
+}
+@keyframes welcomeZoom {
+  from { transform: scale(1); }
+  to   { transform: scale(1.09); }
+}
+
+.welcome-arrow {
+  position: absolute; top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 52px; height: 52px;
+  display: flex; align-items: center; justify-content: center;
+  color: #ffffff;
+  background: rgba(0,0,0,0.22);
+  border-radius: 50%;
+  transition: background 0.3s var(--ease-out), transform 0.3s var(--ease-soft);
+}
+.welcome-arrow:hover { background: rgba(0,0,0,0.45); }
+.welcome-prev { left: clamp(0.6rem, 2vw, 1.6rem); }
+.welcome-next { right: clamp(0.6rem, 2vw, 1.6rem); }
+.welcome-prev:hover { transform: translateY(-50%) translateX(-2px); }
+.welcome-next:hover { transform: translateY(-50%) translateX(2px); }
+
+.welcome-dots {
+  position: absolute; bottom: 1rem; left: 0; right: 0;
+  z-index: 3;
+  display: flex; justify-content: center; gap: 0.5rem;
+}
+.welcome-dots button {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.45);
+  transition: background 0.3s, transform 0.3s;
+}
+.welcome-dots button.is-active {
+  background: #ffffff;
+  transform: scale(1.25);
 }
 
 /* =============================================================
