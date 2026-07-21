@@ -165,16 +165,12 @@
     root.addEventListener("mouseenter", () => { if (timer) clearInterval(timer); });
     root.addEventListener("mouseleave", restart);
 
-    // Altura: logo + menú + carrusel caben justos en la primera pantalla
+    // Altura del carrusel: casi toda la pantalla (menos el menú fijo), para que
+    // las fotos se recorten lo mínimo y se vean lo más grandes posible.
     function fit() {
-      const topbar = $(".topbar");
-      const hero = $(".hero");
       const nav = $(".nav");
-      const used =
-        (topbar ? topbar.offsetHeight : 0) +
-        (hero ? hero.offsetHeight : 0) +
-        (nav ? nav.offsetHeight : 0);
-      const h = Math.max(260, window.innerHeight - used);
+      const navH = nav ? nav.offsetHeight : 0;
+      const h = Math.max(420, window.innerHeight - navH - 8);
       root.style.setProperty("--welcome-h", h + "px");
     }
     fit();

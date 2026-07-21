@@ -756,7 +756,7 @@ body.menu-open { overflow: hidden; }
 }
 @keyframes welcomeZoom {
   from { transform: scale(1); }
-  to   { transform: scale(1.09); }
+  to   { transform: scale(1.05); }
 }
 
 /* Título sobre las fotos (abajo a la izquierda, como la referencia) */
