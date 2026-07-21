@@ -372,20 +372,9 @@ ul { list-style: none; padding: 0; }
 }
 .nav-brand-name { letter-spacing: 0.02em; }
 
-/* Logo en el nav: dentro de una pastilla oscura redondeada para que la marca
-   crema se lea bien sobre el hero (sea claro u oscuro). */
+/* Logo en el nav: eliminado */
 .nav-logo {
-  display: block;
-  height: 60px;
-  width: auto;
-  padding: 9px 18px;
-  background: rgba(13,9,5,0.55);
-  border: 1px solid rgba(242,235,218,0.16);
-  border-radius: 22px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
-}
-@media (min-width: 720px) {
-  .nav-logo { height: 78px; }
+  display: none;
 }
 
 .nav-links {
@@ -563,9 +552,9 @@ body.menu-open { overflow: hidden; }
 
 .hero-logo {
   display: block;
-  width: clamp(240px, 35vw, 420px);
+  width: clamp(300px, 45vw, 500px);
   height: auto;
-  margin: 0 auto 0.8rem;
+  margin: 0 auto;
   filter: none;
 }
 
