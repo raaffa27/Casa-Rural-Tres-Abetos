@@ -45,7 +45,9 @@
   /* Z-index scale */
   --z-nav: 100;
   --z-cursor: 9000;
-  --z-mobile-menu: 95;
+  /* Por encima del nav: el menú móvil debe tapar la barra blanca, si no
+     asoma por encima del panel oscuro y parece un fallo. */
+  --z-mobile-menu: 120;
   --z-splash: 10000;
 }
 
@@ -502,6 +504,25 @@ ul { list-style: none; padding: 0; }
   transition: clip-path 0.7s var(--ease-soft);
 }
 .nav-mobile[aria-hidden="false"] { clip-path: inset(0); }
+
+/* X de cerrar: fija dentro del propio panel, así siempre se ve aunque la
+   página estuviera desplazada al abrir el menú. */
+.nav-mobile-close {
+  position: absolute;
+  top: max(1rem, env(safe-area-inset-top));
+  right: var(--gutter-x);
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--cream);
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  transition: color 0.3s var(--ease-out), border-color 0.3s var(--ease-out), background 0.3s var(--ease-out);
+}
+.nav-mobile-close:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: rgba(200,152,86,0.08);
+}
 .nav-mobile-link {
   font-family: var(--serif);
   font-style: italic;

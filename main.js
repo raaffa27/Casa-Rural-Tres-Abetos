@@ -201,6 +201,8 @@
       if (burger.classList.contains("is-open")) close();
       else open();
     });
+    const closeBtn = $("[data-nav-close]");
+    if (closeBtn) closeBtn.addEventListener("click", close);
     menu.addEventListener("click", (e) => {
       if (e.target.matches("a")) close();
     });
