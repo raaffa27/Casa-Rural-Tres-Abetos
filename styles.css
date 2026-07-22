@@ -391,21 +391,16 @@ ul { list-style: none; padding: 0; }
   border-bottom: 1px solid #e2e2e2;
   transition: padding 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
 }
-/* El enlace del logo en el nav ya no se usa: no debe ocupar sitio ni romper el centrado */
-.nav-brand { display: none; }
 .nav.is-scrolled {
   padding-top: 0.7rem;
   padding-bottom: 0.7rem;
   box-shadow: 0 1px 12px rgba(0,0,0,0.06);
 }
 
+/* El enlace del logo del nav ya no se usa (el logo vive arriba, sobre el blanco).
+   display:none para que no ocupe sitio ni descentre el botón Reservar en móvil. */
 .nav-brand {
-  display: flex; align-items: center; gap: 0.7rem;
-  font-family: var(--serif);
-  font-size: 1.1rem;
-  font-style: italic;
-  font-weight: 400;
-  color: var(--cream);
+  display: none;
 }
 .nav-brand-mark {
   color: var(--accent);
