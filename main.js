@@ -121,6 +121,22 @@
     if (index < 0) index = 0;
     let timer = null;
 
+    // Carga progresiva: la 1.ª foto va en el HTML (se ve al instante). Las demás
+    // llevan data-src y se cargan sin bloquear la primera pantalla. Preloada la
+    // foto actual y la siguiente; el resto entra tras cargar la página.
+    function load(i) {
+      const img = slides[(i + slides.length) % slides.length].querySelector("img");
+      if (img && img.dataset.src) {
+        img.src = img.dataset.src;
+        delete img.dataset.src;
+      }
+    }
+    load(index);
+    load(index + 1);
+    const loadRest = () => slides.forEach((_, i) => load(i));
+    if (document.readyState === "complete") setTimeout(loadRest, 400);
+    else window.addEventListener("load", () => setTimeout(loadRest, 400), { once: true });
+
     // Puntitos indicadores
     const dots = slides.map((_, i) => {
       const b = document.createElement("button");
@@ -146,6 +162,8 @@
 
     function go(to, manual) {
       index = (to + slides.length) % slides.length;
+      load(index);
+      load(index + 1); // precarga la siguiente para que no haya hueco
       paint();
       if (manual) restart();
     }
